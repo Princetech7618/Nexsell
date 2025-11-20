@@ -124,7 +124,7 @@ export default function Navbar() {
               </Link>
 
               {/* Underline for mobile */}
-              <motion.div
+            <motion.div
                 variants={{
                   rest: { opacity: 0, width: 0 },
                   hover: { opacity: 1, width: "100%" },
@@ -139,7 +139,7 @@ export default function Navbar() {
           <motion.div whileHover={{ scale: 1.05 }}>
             <Link
               href="/Login"
-              className="text-indigo-600 text-lg font-semibold"
+              className="px-4 py-2 border border-indigo-700 text-indigo-600 rounded-lg hover:bg-indigo-700 hover:text-white transition-all"
               onClick={() => setOpen(false)}
             >
               Login

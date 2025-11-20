@@ -63,9 +63,8 @@ export default function EditListing() {
     const stored = JSON.parse(localStorage.getItem("sellFormDataList") || "[]");
     if (stored[id]) {
       setFormData(stored[id]);
-    } else {
-      router.push("/MyListings");
     }
+  
   }, [id, router]);
 
   const handleChange = (e) => {
@@ -147,7 +146,7 @@ export default function EditListing() {
 
   return (
     
-    <div className="max-w-3xl mt-25 mb-10 mx-auto p-6 bg-white rounded-3xl shadow-lg border ">
+    <div className="max-w-3xl mt-25 mb-10 mx-auto p-6 bg-white rounded-xl shadow-lg border ">
             <button
       onClick={() => router.back()}
       className="px-4 py-2  text-indigo-600 rounded-full cursor-pointer transition mb-5"

@@ -1,5 +1,3 @@
-
-
 // // "use client";
 
 // // import React, { useEffect, useMemo, useState } from "react";
@@ -286,8 +284,6 @@
 // //                 </p>
 // //                 <p className="text-gray-500 text-sm mt-1">{item.location}</p>
 
-            
-
 // //                 <div className="mt-4 flex gap-3">
 // //                   <Link
 // //                     href={`/Details/${allListings.indexOf(item)}`}
@@ -341,11 +337,6 @@
 // //     </main>
 // //   );
 // // }
-
-
-
-
-
 
 // "use client";
 
@@ -623,7 +614,7 @@
 
 //                 <div className="mt-4 flex gap-3">
 //                <Link
-// href={`/ListingsDetails/${idx}`} 
+// href={`/ListingsDetails/${idx}`}
 //   className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg transition-colors duration-300 hover:from-purple-600 hover:to-indigo-600"
 // >
 //   View
@@ -675,7 +666,6 @@
 //   );
 // }
 
-
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -702,9 +692,11 @@ export default function MyListings() {
       let stored = JSON.parse(localStorage.getItem("sellFormDataList") || "[]");
       stored = Array.isArray(stored) ? stored : [stored];
 
-      stored = stored.map(item => ({
+      stored = stored.map((item) => ({
         ...item,
-        id: item.id || Date.now().toString() + Math.random().toString(36).substr(2, 9),
+        id:
+          item.id ||
+          Date.now().toString() + Math.random().toString(36).substr(2, 9),
       }));
 
       setAllListings(stored);
@@ -719,7 +711,7 @@ export default function MyListings() {
     const setC = new Set();
     const setB = new Set();
     const setL = new Set();
-    allListings.forEach(l => {
+    allListings.forEach((l) => {
       if (l.category) setC.add(l.category);
       if (l.brand) setB.add(l.brand);
       if (l.location) setL.add(l.location);
@@ -736,19 +728,21 @@ export default function MyListings() {
     if (query.trim()) {
       const q = query.trim().toLowerCase();
       list = list.filter(
-        l =>
+        (l) =>
           (l.title || "").toLowerCase().includes(q) ||
           (l.description || "").toLowerCase().includes(q)
       );
     }
-    if (filterCategory) list = list.filter(l => l.category === filterCategory);
-    if (filterBrand) list = list.filter(l => l.brand === filterBrand);
-    if (filterLocation) list = list.filter(l => l.location === filterLocation);
+    if (filterCategory)
+      list = list.filter((l) => l.category === filterCategory);
+    if (filterBrand) list = list.filter((l) => l.brand === filterBrand);
+    if (filterLocation)
+      list = list.filter((l) => l.location === filterLocation);
 
     const min = minPrice !== "" ? Number(minPrice) : null;
     const max = maxPrice !== "" ? Number(maxPrice) : null;
-    if (min !== null) list = list.filter(l => Number(l.price) >= min);
-    if (max !== null) list = list.filter(l => Number(l.price) <= max);
+    if (min !== null) list = list.filter((l) => Number(l.price) >= min);
+    if (max !== null) list = list.filter((l) => Number(l.price) <= max);
 
     if (sortBy === "price-asc") {
       list.sort((a, b) => Number(a.price) - Number(b.price));
@@ -783,8 +777,8 @@ export default function MyListings() {
     return filtered.slice(start, start + PAGE_SIZE);
   }, [filtered, page]);
 
-  const deleteListing = id => {
-    const updated = allListings.filter(item => item.id !== id);
+  const deleteListing = (id) => {
+    const updated = allListings.filter((item) => item.id !== id);
     setAllListings(updated);
     localStorage.setItem("sellFormDataList", JSON.stringify(updated));
   };
@@ -802,7 +796,9 @@ export default function MyListings() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-4xl font-bold text-indigo-700 mb-6 text-center">My Listings</h1>
+      <h1 className="text-4xl font-bold text-indigo-700 mb-6 text-center">
+        My Listings
+      </h1>
 
       {/* Filters */}
       <section className="bg-white p-4 rounded-2xl shadow mb-8 overflow-x-auto">
@@ -810,7 +806,7 @@ export default function MyListings() {
           {/* Search */}
           <input
             value={query}
-            onChange={e => {
+            onChange={(e) => {
               setQuery(e.target.value);
               setPage(1);
             }}
@@ -821,14 +817,14 @@ export default function MyListings() {
           {/* Category */}
           <select
             value={filterCategory}
-            onChange={e => {
+            onChange={(e) => {
               setFilterCategory(e.target.value);
               setPage(1);
             }}
             className="p-3 border rounded-lg w-40"
           >
             <option value="">All Categories</option>
-            {categories.map(c => (
+            {categories.map((c) => (
               <option key={c}>{c}</option>
             ))}
           </select>
@@ -836,14 +832,14 @@ export default function MyListings() {
           {/* Brand */}
           <select
             value={filterBrand}
-            onChange={e => {
+            onChange={(e) => {
               setFilterBrand(e.target.value);
               setPage(1);
             }}
             className="p-3 border rounded-lg w-40"
           >
             <option value="">All Brands</option>
-            {brands.map(b => (
+            {brands.map((b) => (
               <option key={b}>{b}</option>
             ))}
           </select>
@@ -851,14 +847,14 @@ export default function MyListings() {
           {/* Location */}
           <select
             value={filterLocation}
-            onChange={e => {
+            onChange={(e) => {
               setFilterLocation(e.target.value);
               setPage(1);
             }}
             className="p-3 border rounded-lg w-40"
           >
             <option value="">All Locations</option>
-            {locations.map(l => (
+            {locations.map((l) => (
               <option key={l}>{l}</option>
             ))}
           </select>
@@ -869,7 +865,7 @@ export default function MyListings() {
               type="number"
               placeholder="Min"
               value={minPrice}
-              onChange={e => {
+              onChange={(e) => {
                 setMinPrice(e.target.value);
                 setPage(1);
               }}
@@ -879,7 +875,7 @@ export default function MyListings() {
               type="number"
               placeholder="Max"
               value={maxPrice}
-              onChange={e => {
+              onChange={(e) => {
                 setMaxPrice(e.target.value);
                 setPage(1);
               }}
@@ -890,7 +886,7 @@ export default function MyListings() {
           {/* Sort */}
           <select
             value={sortBy}
-            onChange={e => {
+            onChange={(e) => {
               setSortBy(e.target.value);
               setPage(1);
             }}
@@ -903,7 +899,11 @@ export default function MyListings() {
           </select>
 
           {/* Clear */}
-          <button onClick={clearFilters} className="p-3 bg-gray-100 rounded-lg" type="button">
+          <button
+            onClick={clearFilters}
+            className="p-3 bg-gray-100 rounded-lg"
+            type="button"
+          >
             Clear
           </button>
         </div>
@@ -911,62 +911,72 @@ export default function MyListings() {
 
       {/* Listings */}
       {paginated.length === 0 ? (
-        <p className="text-center text-gray-500">No listings match your filters.</p>
+        <p className="text-center text-gray-500">
+          No listings match your filters.
+        </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {paginated.map(item => (
-            <motion.article
-              key={item.id}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col"
-            >
-              {item.images?.length ? (
-                <img src={item.images[0]} alt={item.title} className="h-52 w-full object-cover rounded-t-3xl" />
-              ) : (
-                <div className="h-52 w-full bg-indigo-50 flex items-center justify-center text-indigo-300 rounded-t-3xl">
-                  No Image
-                </div>
-              )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer">
+          {paginated.map((item) => (
+         <Link href={`/ListingsDetails/${item.id}`} className="block">
+  <motion.article
+    key={item.id}
+    initial={{ opacity: 0, y: 8 }}
+    animate={{ opacity: 1, y: 0 }}
+    whileHover={{ scale: 1.03 }}
+    transition={{ duration: 0.3 }}
+    className="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col cursor-pointer"
+  >
+    {item.images?.length ? (
+      <img
+        src={item.images[0]}
+        alt={item.title}
+        className="h-52 w-full object-cover rounded-t-3xl"
+      />
+    ) : (
+      <div className="h-52 w-full bg-indigo-50 flex items-center justify-center text-indigo-300 rounded-t-3xl">
+        No Image
+      </div>
+    )}
 
-              <div className="p-5 flex flex-col flex-grow">
-                <h2 className="text-lg font-bold text-black">{item.title}</h2>
-                <p className="text-indigo-600 font-semibold mt-2">₹{item.price}</p>
-                <p className="text-gray-700 text-sm mt-1">{item.location}</p>
+    <div className="p-5 flex flex-col flex-grow">
+      <h2 className="text-lg font-bold text-black">{item.title}</h2>
+      <p className="text-indigo-600 font-semibold mt-2">₹{item.price}</p>
+      <p className="text-gray-700 text-sm mt-1">{item.location}</p>
 
-                <div className="mt-4 flex gap-3">
-                  <Link
-                    href={`/ListingsDetails/${item.id}`}
-                    className="px-4 py-2 bg-indigo-600 text-white rounded-lg transition-colors duration-300 hover:from-purple-600 hover:to-indigo-600"
-                  >
-                    View
-                  </Link>
+      <div className="mt-4 flex gap-3">
+        <Link
+          href={`/Edit/${item.id}`}
+          onClick={(e) => e.stopPropagation()}
+          className="px-4 py-2 bg-indigo-600 text-white rounded-lg transition-colors duration-300 hover:from-emerald-600 hover:to-green-600"
+        >
+          Edit
+        </Link>
 
-                  <Link
-                    href={`/Edit/${item.id}`}
-                    className="px-4 py-2 bg-indigo-600 text-white rounded-lg transition-colors duration-300 hover:from-emerald-600 hover:to-green-600"
-                  >
-                    Edit
-                  </Link>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            deleteListing(item.id);
+          }}
+          className="px-4 py-2 bg-indigo-600 text-white rounded-lg transition-colors duration-300 hover:from-rose-600 hover:to-red-600"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </motion.article>
+</Link>
 
-                  <button
-                    onClick={() => deleteListing(item.id)}
-                    className="px-4 py-2 bg-indigo-600 text-white rounded-lg transition-colors duration-300 hover:from-rose-600 hover:to-red-600"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </motion.article>
           ))}
         </div>
       )}
 
       {/* Pagination */}
       <div className="mt-8 flex justify-center items-center gap-3">
-        <button onClick={() => setPage(p => Math.max(1, p - 1))} className="px-4 py-2 bg-white border rounded-lg" disabled={page <= 1}>
+        <button
+          onClick={() => setPage((p) => Math.max(1, p - 1))}
+          className="px-4 py-2 bg-white border rounded-lg"
+          disabled={page <= 1}
+        >
           Prev
         </button>
 
@@ -974,7 +984,11 @@ export default function MyListings() {
           Page {page} / {pageCount}
         </div>
 
-        <button onClick={() => setPage(p => Math.min(pageCount, p + 1))} className="px-4 py-2 bg-white border rounded-lg" disabled={page >= pageCount}>
+        <button
+          onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+          className="px-4 py-2 bg-white border rounded-lg"
+          disabled={page >= pageCount}
+        >
           Next
         </button>
       </div>

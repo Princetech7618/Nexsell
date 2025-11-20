@@ -174,7 +174,7 @@ export default function SellForm() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-3xl mt-25 mb-10 shadow-lg border">
+    <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl mt-25 mb-10 shadow-lg border">
             <button
       onClick={() => router.back()}
       className="px-4 py-2  text-indigo-600 rounded-full cursor-pointer transition mb-5"

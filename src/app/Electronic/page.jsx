@@ -246,7 +246,7 @@ bgImg={"https://images.unsplash.com/photo-1491933382434-500287f9b54b?q=80&w=1600
 
 
     <main className="bg-white min-h-screen py-10 font-serif px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <h1 className="text-5xl font-semibold text-indigo-500 mb-8 text-center">
+      <h1 className="sm:text-5xl font-semibold text-indigo-500 mb-8 text-center">
         Electronics for Sale
       </h1>
 

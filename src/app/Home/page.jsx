@@ -718,15 +718,65 @@ const featuredAds = [
     img: "https://images.pexels.com/photos/163845/truck-heavy-transportation-vehicle-163845.jpeg",
   },
 ];
+ const trendingDeals = [
+    {
+      id: 1,
+      title: "iPhone 13 – Like New",
+      price: "₹42,000",
+      img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+    },
+    {
+      id: 2,
+      title: "Honda Activa 2020",
+      price: "₹52,000",
+      img: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d",
+    },
+    {
+      id: 3,
+      title: "HP Victus Gaming Laptop",
+      price: "₹58,000",
+      img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+    },
+     
 
-const locations = [
-  { name: "Delhi", img: "https://images.unsplash.com/photo-1548013146-72479768bada?w=500" },
-  { name: "Mumbai", img: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=500" },
-  { name: "Bangalore", img: "https://images.unsplash.com/photo-1596783074918-c99454a5c0e9?w=500" },
-  { name: "Hyderabad", img: "https://images.unsplash.com/photo-1587474267370-4ce5026f1c19?w=500" },
-  { name: "Chennai", img: "https://images.unsplash.com/photo-1580584126903-c17d41830450?w=500" },
-  { name: "Kolkata", img: "https://images.unsplash.com/photo-1538334421857-687fd3ad1ebb?w=500" },
-];
+  {
+    id: 4,
+    title: "Maruti Swift 2019 – VXI",
+    price: "₹4,80,000",
+   
+    img: 
+      "https://images.unsplash.com/photo-1502877338535-766e1452684a",
+  },
+
+  {
+    id: 5,
+    title: "Sony Bravia 55-inch 4K TV",
+    price: "₹39,000",
+  
+      img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+    
+  },
+
+  {
+    id: 6,
+    title: "MacBook Air M1 – 2021",
+    price: "₹62,000",
+   
+    img: 
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+   
+  },
+  ];
+
+
+// const locations = [
+//   { name: "Delhi", img: "https://images.unsplash.com/photo-1548013146-72479768bada?w=500" },
+//   { name: "Mumbai", img: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=500" },
+//   { name: "Bangalore", img: "https://images.unsplash.com/photo-1596783074918-c99454a5c0e9?w=500" },
+//   { name: "Hyderabad", img: "https://images.unsplash.com/photo-1587474267370-4ce5026f1c19?w=500" },
+//   { name: "Chennai", img: "https://images.unsplash.com/photo-1580584126903-c17d41830450?w=500" },
+//   { name: "Kolkata", img: "https://images.unsplash.com/photo-1538334421857-687fd3ad1ebb?w=500" },
+// ];
 
 export default function Home() {
   const router = useRouter();
@@ -854,7 +904,7 @@ export default function Home() {
                 setPriceRange([0, 9999999]);
                 setSearchText("");
               }}
-              className="p-2 mt-5 bg-indigo-500 text-white rounded-full shadow transition hover:bg-indigo-600"
+              className="p-2 mt-5 cursor-pointer bg-indigo-500 text-white rounded-full shadow transition hover:bg-indigo-600"
             >
               Reset Filters
             </button>
@@ -957,6 +1007,36 @@ export default function Home() {
         )}
       </section> */}
 
+
+
+   {/* ====================== TRENDING DEALS ====================== */}
+     <section className="py-14 bg-gray-100">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-5xl font-serif text-center text-indigo-600 mb-6">
+          Trending Deals 
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {trendingDeals.map((deal) => (
+            <motion.div
+              key={deal.id}
+              onClick={() => router.push(`/TreandingDetails/${deal.id}`)}
+              whileHover={{ scale: 1.04 }}
+              className="bg-white rounded-xl overflow-hidden shadow cursor-pointer"
+            >
+              <img src={deal.img} className="w-full h-52 object-cover" />
+              <div className="p-4">
+                <h3 className="text-lg font-semibold">{deal.title}</h3>
+                <p className="text-indigo-600 font-bold text-xl mt-2">
+                  {deal.price}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+
       {/* WHY NEXSELL */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
@@ -1002,30 +1082,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* LOCATIONS */}
-      <section className="py-20 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl text-center mb-10 text-indigo-600">Popular Locations</h2>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {locations.map((loc, index) => (
-              <div
-                key={index}
-                className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition cursor-pointer"
-              >
-                <img
-                  src={loc.img}
-                  alt={loc.name}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition"
-                />
-                <div className="absolute bottom-4 left-4 text-white">
-                  <h3 className="text-xl">{loc.name}</h3>
-                  {/* <span className="px-4 py-1 bg-indigo-600 rounded-full text-sm">Explore →</span> */}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+   
     </main>
   );
 }

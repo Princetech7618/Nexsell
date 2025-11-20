@@ -65,18 +65,18 @@ export default function ForgetPassword() {
           </a>
         </div>
 
-         <div className="mt-10 flex justify-center gap-4">
+         <div className="mt-10  flex justify-center gap-4">
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     onClick={() => handleSocialLogin("Google")}
-                    className="px-4 py-2 bg-gray-100 text-black rounded-xl shadow-md hover:bg-gray-200 transition flex items-center gap-2"
+                    className="p-2 bg-gray-100 text-black rounded-xl shadow-md hover:bg-gray-200 transition flex items-center gap-2"
                   >
                     <FaGoogle /> Google
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     onClick={() => handleSocialLogin("Facebook")}
-                    className="px-4 py-2 bg-gray-100 text-black rounded-xl shadow-md hover:bg-gray-200 transition flex items-center gap-2"
+                    className="p-2 bg-gray-100 text-black rounded-xl shadow-md hover:bg-gray-200 transition flex items-center gap-2"
                   >
                     <FaFacebook /> Facebook
                   </motion.button>

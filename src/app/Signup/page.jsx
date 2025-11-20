@@ -96,14 +96,14 @@ export default function SignUpPage() {
           <motion.button
             whileHover={{ scale: 1.1 }}
             onClick={() => handleSocialSignUp("Google")}
-            className="px-4 py-2 bg-gray-100 text-black rounded-xl shadow-md hover:bg-gray-200 transition flex items-center gap-2"
+            className="p-2 bg-gray-100 text-black rounded-xl shadow-md hover:bg-gray-200 transition flex items-center gap-2"
           >
             <FaGoogle /> Google
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.1 }}
             onClick={() => handleSocialSignUp("Facebook")}
-            className="px-4 py-2 bg-gray-100 text-black rounded-xl shadow-md hover:bg-gray-200 transition flex items-center gap-2"
+            className="p-2 bg-gray-100 text-black rounded-xl shadow-md hover:bg-gray-200 transition flex items-center gap-2"
           >
             <FaFacebookF /> Facebook
           </motion.button>
