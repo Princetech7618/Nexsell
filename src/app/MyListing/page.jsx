@@ -947,7 +947,7 @@ export default function MyListings() {
         <Link
           href={`/Edit/${item.id}`}
           onClick={(e) => e.stopPropagation()}
-          className="px-4 py-2 bg-indigo-600 text-white rounded-lg transition-colors duration-300 hover:from-emerald-600 hover:to-green-600"
+          className="px-4 py-2 bg-indigo-600 cursor-pointer text-white rounded-lg transition-colors duration-300"
         >
           Edit
         </Link>
@@ -957,7 +957,7 @@ export default function MyListings() {
             e.stopPropagation();
             deleteListing(item.id);
           }}
-          className="px-4 py-2 bg-indigo-600 text-white rounded-lg transition-colors duration-300 hover:from-rose-600 hover:to-red-600"
+          className="px-4 py-2 bg-indigo-600 cursor-pointer text-white rounded-lg transition-colors duration-300 "
         >
           Delete
         </button>
@@ -974,7 +974,7 @@ export default function MyListings() {
       <div className="mt-8 flex justify-center items-center gap-3">
         <button
           onClick={() => setPage((p) => Math.max(1, p - 1))}
-          className="px-4 py-2 bg-white border rounded-lg"
+          className="px-4 py-2 bg-white border  rounded-lg cursor-pointer"
           disabled={page <= 1}
         >
           Prev
@@ -986,7 +986,7 @@ export default function MyListings() {
 
         <button
           onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
-          className="px-4 py-2 bg-white border rounded-lg"
+          className="px-4 py-2 bg-white border rounded-lg cursor-pointer"
           disabled={page >= pageCount}
         >
           Next

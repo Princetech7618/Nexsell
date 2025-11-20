@@ -347,7 +347,7 @@ export default function EditListing() {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition transform hover:scale-105"
+          className="w-full bg-indigo-600 cursor-pointer hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition transform hover:scale-105"
         >
           Save Changes
         </button>
