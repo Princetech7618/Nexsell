@@ -659,7 +659,7 @@ const featuredAds = [
     price: "₹1,10,000",
     location: "Mumbai",
     category: "Bikes",
-    img: "https://images.pexels.com/photos/17693829/pexels-photo-17693829.jpeg",
+    img: "/img/Home1.avif",
   },
   {
     id: 6,
@@ -691,7 +691,7 @@ const featuredAds = [
     price: "₹22,500",
     location: "Chandigarh",
     category: "Electronics",
-    img: "https://images.pexels.com/photos/1454826/pexels-photo-1454826.jpeg",
+    img: "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg",
   },
   {
     id: 10,
@@ -715,7 +715,7 @@ const featuredAds = [
     price: "₹4,80,000",
     location: "Kolkata",
     category: "Commercial",
-    img: "https://images.pexels.com/photos/163845/truck-heavy-transportation-vehicle-163845.jpeg",
+    img: "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg",
   },
 ];
  const trendingDeals = [
@@ -1010,23 +1010,23 @@ export default function Home() {
 
 
    {/* ====================== TRENDING DEALS ====================== */}
-     <section className="py-14 bg-gray-100">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-5xl font-serif text-center text-indigo-600 mb-6">
+     <section className="  bg-gray-100 font-bold">
+      <div className="max-w-7xl rounded  mx-auto px-6 py-10">
+        <h2 className="md:text-5xl text-4xl font-serif text-center text-indigo-600 mb-6">
           Trending Deals 
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
           {trendingDeals.map((deal) => (
             <motion.div
               key={deal.id}
               onClick={() => router.push(`/TreandingDetails/${deal.id}`)}
               whileHover={{ scale: 1.04 }}
-              className="bg-white rounded-xl overflow-hidden shadow cursor-pointer"
+              className="bg-white rounded-xl  overflow-hidden shadow cursor-pointer"
             >
-              <img src={deal.img} className="w-full h-52 object-cover" />
+              <img src={deal.img} className="w-full  h-52 object-cover" />
               <div className="p-4">
-                <h3 className="text-lg font-semibold">{deal.title}</h3>
+                <h3 className="text-lg font-bold">{deal.title}</h3>
                 <p className="text-indigo-600 font-bold text-xl mt-2">
                   {deal.price}
                 </p>
