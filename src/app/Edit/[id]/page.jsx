@@ -153,7 +153,7 @@ export default function EditListing() {
     >
       ← Back
     </button>
-      <h2 className="text-3xl font-extrabold text-indigo-700 mb-8 text-center">
+      <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
         Edit Your Listing
       </h2>
 

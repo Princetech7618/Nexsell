@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { FaFacebookF, FaInstagram, FaTwitter, FaGoogle } from "react-icons/fa";
+
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -40,7 +43,7 @@ export default function ContactPage() {
         transition={{ duration: 0.8 }}
         className="text-center mb-12 sm:mb-16"
       >
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-indigo-600 mb-4">
+        <h1 className="text-4xl sm:text-5xl font-bold text-gary-800 mb-4">
           Contact NexSell
         </h1>
         <p className="text-gray-600 text-base sm:text-lg max-w-3xl mx-auto">
@@ -68,7 +71,7 @@ export default function ContactPage() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all"
             />
             <input
               type="email"
@@ -77,7 +80,7 @@ export default function ContactPage() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all"
             />
             <input
               type="text"
@@ -86,7 +89,7 @@ export default function ContactPage() {
               value={formData.subject}
               onChange={handleChange}
               required
-              className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all"
             />
             <textarea
               name="message"
@@ -95,7 +98,7 @@ export default function ContactPage() {
               onChange={handleChange}
               required
               rows={5}
-              className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all"
             />
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -139,13 +142,32 @@ export default function ContactPage() {
           {/* Social Links */}
           <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl transition-all">
             <h3 className="text-xl sm:text-2xl font-bold mb-3 text-gray-900">
-              Connect with Us
+              Connect with Social Media
             </h3>
             <div className="flex flex-wrap gap-4 sm:gap-6 text-gray-700">
-              <a href="#" className="hover:text-blue-600 transition-all">LinkedIn</a>
-              <a href="#" className="hover:text-blue-500 transition-all">Twitter</a>
-              <a href="#" className="hover:text-pink-500 transition-all">Instagram</a>
-              <a href="#" className="hover:text-blue-700 transition-all">Facebook</a>
+     <Link href="https://facebook.com" target="_blank">
+              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-white transition cursor-pointer text-blue-600">
+                <FaFacebookF />
+              </div>
+            </Link>
+
+            <Link href="https://twitter.com" target="_blank">
+              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-white transition cursor-pointer text-blue-600">
+                <FaTwitter />
+              </div>
+            </Link>
+
+            <Link href="https://instagram.com" target="_blank">
+              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-white transition cursor-pointer text-pink-600">
+                <FaInstagram />
+              </div>
+            </Link>
+
+            <Link href="https://google.com" target="_blank">
+              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-white transition cursor-pointer text-blue-600">
+                <FaGoogle />
+              </div>
+            </Link>
             </div>
           </div>
         </motion.div>

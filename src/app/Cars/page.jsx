@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Hero from "../Components/Hero";
+import Card from "../Card/pages";
+import { useRouter } from "next/navigation";
 
-
-// Sample 20 cars data with category and brand
 const carsData = [
   {
     id: 1,
@@ -186,16 +186,39 @@ const carsData = [
     brand: "Hyundai",
     img: "https://images.pexels.com/photos/3707995/pexels-photo-3707995.jpeg",
   },
-];
+]; 
 
 const categories = ["All", "SUV", "Sedan", "Hatchback"];
 const brands = ["All", "Hyundai", "Maruti", "Honda", "Tata", "Kia", "Toyota", "Ford"];
 
 export default function CarsPage() {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeBrand, setActiveBrand] = useState("All");
 
-  // Filter cars based on active category and brand
+  // ❤️ Liked cars
+  const [likedCars, setLikedCars] = useState([]);
+
+  // Load liked cars from localStorage
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("likedCars")) || [];
+    setLikedCars(stored);
+  }, []);
+
+  // ❤️ Toggle Like
+  const toggleLike = (car) => {
+    setLikedCars((prev) => {
+      const exists = prev.some((c) => c.id === car.id);
+      const updated = exists
+        ? prev.filter((c) => c.id !== car.id)
+        : [...prev, { ...car, type: "car" }]; // ⭐ MUST ADD type
+      localStorage.setItem("likedCars", JSON.stringify(updated));
+      window.dispatchEvent(new Event("savedItemsUpdated"));
+      return updated;
+    });
+  };
+
+  // Filter cars based on category + brand
   const filteredCars = carsData.filter((car) => {
     return (
       (activeCategory === "All" || car.category === activeCategory) &&
@@ -204,154 +227,99 @@ export default function CarsPage() {
   });
 
   return (
- 
-   <div>
-    {/* Hero */}
-<Hero tittle="welcome to cars  " 
-bgImg={"https://images.pexels.com/photos/733745/pexels-photo-733745.jpeg"}
-/>
-     <main className="bg-white min-h-screen py-10 font-serif px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-  
-  
-      {/* Heading */}
-      <h1 className="text-4xl font-extrabold text-indigo-600 mb-8 text-center">Cars for Sale</h1>
+    <div>
+      <Hero
+        tittle={"Find Your Perfect Ride"}
+        text={"Browse top cars and deals to drive your dream ride" }
+        bgImg={"https://images.pexels.com/photos/733745/pexels-photo-733745.jpeg"}
+      />
 
-      {/* Filters */}
-      <section className="flex flex-col md:flex-row justify-center gap-6 mb-10">
-        {/* Category Filter */}
-        <div>
-          <h3 className="text-lg font-serif mb-3 text-gray-700">Filter by Category</h3>
-          <div className="flex flex-wrap gap-3">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-lg border text-sm font-medium transition
-                  ${
+      <main className="bg-white  min-h-screen py-10  px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">Explore Cars</h1>
+
+        {/* Filters */}
+        <section className="flex flex-col md:flex-row justify-center gap-6 mb-10">
+          <div>
+            <h3 className="text-lg mb-3 text-gray-700 font-serif">Filter by Category</h3>
+            <div className="flex flex-wrap gap-3">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 rounded-lg border text-sm font-medium transition ${
                     activeCategory === cat
                       ? "bg-indigo-600 text-white border-transparent animate-gradient-x"
                       : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
                   }`}
-                aria-pressed={activeCategory === cat}
-              >
-                {cat}
-              </button>
-            ))}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Brand Filter */}
-        <div>
-          <h3 className="text-lg font-serif mb-3 text-gray-700">Filter by Brand</h3>
-          <div className="flex flex-wrap gap-3">
-            {brands.map((brand) => (
-              <button
-                key={brand}
-                onClick={() => setActiveBrand(brand)}
-                className={`px-4 py-2 rounded-lg border text-sm font-medium transition
-                  ${
+          <div>
+            <h3 className="text-lg mb-3 text-gray-700 font-serif">Filter by Brand</h3>
+            <div className="flex flex-wrap gap-3">
+              {brands.map((brand) => (
+                <button
+                  key={brand}
+                  onClick={() => setActiveBrand(brand)}
+                  className={`px-4 py-2 rounded-lg border text-sm font-medium transition ${
                     activeBrand === brand
                       ? "bg-indigo-600 text-white border-transparent animate-gradient-x"
                       : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
                   }`}
-                aria-pressed={activeBrand === brand}
-              >
-                {brand}
-              </button>
-            ))}
+                >
+                  {brand}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Cars Grid */}
-  <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  {filteredCars.length > 0 ? (
-    filteredCars.map((car) => (
-      <a
-        key={car.id}
-        href={`/CarsDetails/${car.id}`}
-        className="block bg-white rounded-lg overflow-hidden border border-gray-200 
-                   hover:shadow-lg  transition-all duration-600 fade-up"
-      >
-        {/* IMAGE */}
-        <div className="relative">
-          <img
-            src={car.img}
-            alt={car.title}
-            className="w-full h-44 object-cover"
-            loading="lazy"
-          />
-        </div>
+        {/* Cars Grid */}
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredCars.length > 0 ? (
+            filteredCars.map((car) => (
+              <Card
+                key={car.id}
+                ad={car}
+                liked={likedCars.some((c) => c.id === car.id)} // ❤️ UI state
+                img={car.img}
+                title={car.title}
+                price={car.price}
+                location={car.location}
+                  onLike={() => toggleLike(car)}  
+                onClick={() => router.push(`/CarsDetails/${car.id}`)} // 🔥 Navigate to details
+              />
+            ))
+          ) : (
+            <p className="col-span-full text-center text-gray-500 text-lg">No cars found.</p>
+          )}
+        </section>
 
-        {/* CARD BODY */}
-        <div className="p-2">
-          
-          {/* Title */}
-          <h2 className="text-lg font-semibold text-gray-800 line-clamp-1">
-            {car.title}
-          </h2>
-
-          {/* Price */}
-          <p className="text-indigo-700 font-bold mt-1 text-md">
-            {car.price}
+        {/* Extra Content */}
+        <section className="mt-16 bg-indigo-200/50 rounded-3xl p-10 text-center shadow-lg">
+          <h3 className="text-3xl font-bold  text-gray-800 mb-6">Why Choose Nexsell for Cars ?</h3>
+          <p className="text-gray-700 font-sm max-w-3xl mx-auto text-lg leading-relaxed">
+            Nexsell offers a trusted platform with verified listings and buyers. Seamless filters,
+            secure deals & the perfect vehicle in minutes.
           </p>
+        </section>
 
-          {/* Location */}
-          <p className="text-gray-500 text-mx mt-1 flex items-center gap-1">
-            <span className="material-icons text-mx">location_on</span>
-            {car.location}
-          </p>
-
-          {/* Tags */}
-          <div className="mt-3 flex flex-wrap gap-2 text-mx">
-            <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-md">
-              {car.category}
-            </span>
-            <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-md">
-              {car.brand}
-            </span>
-          </div>
-        </div>
-      </a>
-    ))
-  ) : (
-    <p className="col-span-full text-center text-gray-500 text-lg">
-      No cars found.
-    </p>
-  )}
-</section>
-
-
-
-      {/* Extra Content Section */}
-      <section className="mt-16 bg-gradient-to-r from-indigo-50 to-white rounded-3xl p-10 text-center shadow-lg">
-        <h3 className="text-3xl font-serif text-indigo-600 mb-6">Why Choose Nexsell for Cars ?</h3>
-        <p className="text-gray-700 font-serif max-w-3xl mx-auto leading-relaxed text-lg">
-          Nexsell offers a trusted platform with verified listings and buyers, making selling or
-          buying cars effortless and secure. With powerful filters, thousands of vehicles, and a
-          seamless user experience, Nexsell helps you find your perfect vehicle faster.
-        </p>
-
-      </section>
-
-      {/* Tailwind animated gradient */}
-      <style>{`
-        @keyframes gradient-x {
-          0%, 100% {
-            background-position: 0% center;
+        {/* Animated UI */}
+        <style>{`
+          @keyframes gradient-x {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
           }
-          50% {
-            background-position: 100% center;
+          .animate-gradient-x {
+            background-size: 200% auto;
+            animation: gradient-x 3s ease infinite;
           }
-        }
-        .animate-gradient-x {
-          background-size: 200% auto;
-          animation: gradient-x 3s ease infinite;
-        }
-      `}</style>
-
-
-    </main>
-   </div>
+        `}</style>
+      </main>
+    </div>
   );
 }

@@ -42,11 +42,11 @@ export default function HeroSection({ tittle, text, bgImg }) {
 
         {/* Bottom Badges */}
         <div className="flex flex-wrap justify-center gap-6 mt-6 text-sm md:text-base font-medium mt-10">
-          <span className="bg-white/10 font-serif backdrop-blur-md p-2 rounded-full border border-white/20 hover:bg-indigo-500/30 transition cursor-pointer whitespace-nowrap">
+          <span className="bg-white/10 font-serif backdrop-blur-md p-2 rounded-full border border-white/20 hover:bg-indigo-200/50 transition cursor-pointer whitespace-nowrap">
              Live Listings
           </span>
 
-          <span className="bg-white/10 font-serif backdrop-blur-md p-2 rounded-full border border-white/20 hover:bg-indigo-500/30 transition cursor-pointer whitespace-nowrap">
+          <span className="bg-white/10 font-serif backdrop-blur-md p-2 rounded-full border border-white/20 hover:bg-indigo-200/50 transition cursor-pointer whitespace-nowrap">
             Verified Sellers
           </span>
         </div>

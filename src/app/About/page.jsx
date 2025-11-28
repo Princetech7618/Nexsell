@@ -19,11 +19,11 @@ export default function About() {
 
 
 
-    <main className="bg-white text-gray-900 min-h-screen font-serif px-6 py-20 max-w-5xl mx-auto ">
+    <main className="bg-white text-gray-900 min-h-screen  px-6 py-20 max-w-5xl mx-auto ">
       <section className="space-y-20">
 
         {/* Title */}
-        <h1 className="text-5xl font-extrabold text-indigo-600 text-center mb-12">
+        <h1 className="text-5xl font-bold text-gray-800 text-center mb-12">
           About Nexsell
         </h1>
 
@@ -33,7 +33,7 @@ export default function About() {
           {/* Text */}
           <div className="md:w-1/2 text-base md:text-lg leading-normal text-gray-700 max-w-md mx-auto text-center md:text-left">
             <p className="mb-3">
-              Welcome to <strong className="text-indigo-600">Nexsell</strong>, your premium 
+              Welcome to <strong className="text-gray-900">Nexsell</strong>, your premium 
               platform designed to revolutionize buying and selling in India. We focus on 
               speed, safety, and a modern user experience.
             </p>
@@ -70,7 +70,7 @@ export default function About() {
 
           {/* Text */}
           <div className="md:w-1/2 text-base md:text-lg leading-normal max-w-md mx-auto text-center md:text-left">
-            <h2 className="text-3xl font-semibold text-indigo-700 mb-3">
+            <h2 className="text-3xl font-bold text-gray-800 mb-3">
               Our Vision
             </h2>
             <p>
@@ -85,7 +85,7 @@ export default function About() {
 
           {/* Text */}
           <div className="md:w-1/2 text-base md:text-lg leading-normal max-w-md mx-auto text-center md:text-left">
-            <h2 className="text-3xl font-semibold text-indigo-700 mb-3">
+            <h2 className="text-3xl font-bold text-gray-800 mb-3">
               Why Choose Nexsell?
             </h2>
 
@@ -111,7 +111,7 @@ export default function About() {
 
         {/* COMMUNITY */}
         <section className="text-base md:text-lg leading-normal max-w-3xl mx-auto mt-16 text-center">
-          <h2 className="text-3xl font-semibold text-indigo-700 mb-3">
+          <h2 className="text-3xl font-bold text-gray-800 mb-3">
             Our Community
           </h2>
           <p>
@@ -136,7 +136,7 @@ export default function About() {
 
           {/* Text */}
           <div className="md:w-1/2 text-base md:text-lg leading-normal max-w-md mx-auto text-center md:text-left">
-            <h2 className="text-3xl font-semibold text-indigo-700 mb-3">
+            <h2 className="text-3xl font-bold text-gray-800 mb-3">
               Get Started Today!
             </h2>
             <p>

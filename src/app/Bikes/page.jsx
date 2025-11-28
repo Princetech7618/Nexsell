@@ -1,14 +1,11 @@
-
-
-
-
-
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import HeroSection from "../Components/Hero";
+import Card from "../Card/pages";
 
-// Sample 20 bikes data with category and brand
+// Sample 20 bikes data
 const bikesData = [
   {
     id: 1,
@@ -215,10 +212,33 @@ const brands = [
 ];
 
 export default function BikesPage() {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeBrand, setActiveBrand] = useState("All");
 
-  // Filter bikes by selected category and brand
+  const [likedBikes, setLikedBikes] = useState([]);
+
+  // Load liked bikes from localStorage
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("likedBikes")) || [];
+    setLikedBikes(stored);
+  }, []);
+
+  // Toggle like/unlike
+  const toggleLike = (bike) => {
+    setLikedBikes((prev) => {
+      const exists = prev.some((b) => b.id === bike.id);
+      const updated = exists
+        ? prev.filter((b) => b.id !== bike.id)
+        : [...prev, { ...bike, type: "bike" }];
+
+      localStorage.setItem("likedBikes", JSON.stringify(updated));
+      window.dispatchEvent(new Event("savedItemsUpdated"));
+      return updated;
+    });
+  };
+
+  // Filter bikes
   const filteredBikes = bikesData.filter(
     (bike) =>
       (activeCategory === "All" || bike.category === activeCategory) &&
@@ -227,161 +247,109 @@ export default function BikesPage() {
 
   return (
     <>
-        {/* Hero  */}
-    
-    <HeroSection  tittle={"Find Your Perfect Used Bike Today "}
-    text={"✔ Bikes for every budget — from commuters to superbikes"}
-    bgImg={"https://images.unsplash.com/photo-1524429656589-6633a470097c"}
-    
-    
-    />
-    
-    
-    
-    
-    <main className="bg-white font-serif  min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <HeroSection
+        tittle="Find Your Perfect Used Bike Today"
+        text="✔ Bikes for every budget — from commuters to superbikes"
+        bgImg="https://images.unsplash.com/photo-1524429656589-6633a470097c"
+      />
 
-       
-      <h1 className="text-5xl font-serif text-indigo-600 mb-8 text-center">
-        Bikes for Sale
-      </h1>
+      <main className="bg-white  min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h1 className="text-5xl font-bold text-gray-800 mb-8 text-center">
+        Explore Bikes
+        </h1>
 
-      {/* Filters */}
-      <section className="flex flex-col md:flex-row justify-center gap-6 mb-10">
-        {/* Category Filter */}
-        <div>
-          <h3 className="text-lg font-serif mb-3 text-gray-700">
-            Filter by Category
-          </h3>
-          <div className="flex flex-wrap gap-3">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-lg border text-sm font-medium transition
-                ${
-                  activeCategory === cat
-                    ? "bg-indigo-600 text-white border-transparent animate-gradient-x"
-                    : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
-                }`}
-                aria-pressed={activeCategory === cat}
-              >
-                {cat}
-              </button>
-            ))}
+        {/* Filters */}
+        <section className="flex flex-col md:flex-row justify-center gap-6 mb-10">
+          <div>
+            <h3 className="text-lg font-serif mb-3 text-gray-700">
+              Filter by Category
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 rounded-lg border text-sm font-medium transition ${
+                    activeCategory === cat
+                      ? "bg-indigo-600 text-white border-transparent animate-gradient-x"
+                      : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                  }`}
+                  aria-pressed={activeCategory === cat}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Brand Filter */}
-        <div>
-          <h3 className="text-lg font-serif mb-3 text-gray-700">
-            Filter by Brand
-          </h3>
-          <div className="flex flex-wrap gap-3">
-            {brands.map((brand) => (
-              <button
-                key={brand}
-                onClick={() => setActiveBrand(brand)}
-                className={`px-4 py-2 rounded-lg border text-sm font-medium transition
-                ${
-                  activeBrand === brand
-                    ? "bg-indigo-600 text-white border-transparent animate-gradient-x"
-                    : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
-                }`}
-                aria-pressed={activeBrand === brand}
-              >
-                {brand}
-              </button>
-            ))}
+          <div>
+            <h3 className="text-lg font-serif mb-3 text-gray-700">
+              Filter by Brand
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {brands.map((brand) => (
+                <button
+                  key={brand}
+                  onClick={() => setActiveBrand(brand)}
+                  className={`px-4 py-2 rounded-lg border text-sm font-medium transition ${
+                    activeBrand === brand
+                      ? "bg-indigo-600 text-white border-transparent animate-gradient-x"
+                      : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                  }`}
+                  aria-pressed={activeBrand === brand}
+                >
+                  {brand}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Bikes Grid */}
-<section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 font-serif">
-  {filteredBikes.length > 0 ? (
-    filteredBikes.map((bike) => (
-      <a
-        key={bike.id}
-        href={`/BikesDetails/${bike.id}`}
-        className="block group rounded-lg overflow-hidden border border-gray-200 bg-white  shadow-sm transition-all duration-300
-          group-hover:shadow-xl group-hover:-translate-y-1 fade-up"
-      >
-        {/* Image */}
-        <div className="h-44 w-full overflow-hidden bg-gray-100">
-          <img
-            src={bike.img}
-            alt={bike.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
-          />
-        </div>
+        {/* Bikes Grid */}
+        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 font-serif">
+          {filteredBikes.length > 0 ? (
+            filteredBikes.map((bike) => (
+              <Card
+                key={bike.id}
+                ad={bike}
+                liked={likedBikes.some((b) => b.id === bike.id)}
+                img={bike.img}
+                title={bike.title}
+                price={bike.price}
+                location={bike.location}
+                onLike={() => toggleLike(bike)}
+                onClick={() => router.push(`/BikesDetails/${bike.id}`)}
+              />
+            ))
+          ) : (
+            <p className="text-center col-span-full text-gray-500 text-lg">
+              No bikes found.
+            </p>
+          )}
+        </section>
 
-        {/* Content */}
-        <div className="p-3 flex flex-col justify-between h-28">
-          <h2 className="text-[14px] font-semibold text-gray-900 line-clamp-2 leading-snug">
-            {bike.title}
-          </h2>
-
-          {/* Price */}
-          <p className="text-indigo-700 font-serif text-mx mt-1 leading-none">
-           {bike.price}
+        {/* Extra Content */}
+        <section className="mt-16 bg-indigo-200/50 rounded-3xl p-10 text-center shadow-lg max-w-4xl mx-auto">
+          <h3 className="text-3xl text-gray-800 font-bold mb-6">
+            Why Choose Nexsell for Bikes?
+          </h3>
+          <p className="text-gray-700 font-sm max-w-3xl mx-auto leading-relaxed text-lg">
+            Nexsell provides a trusted marketplace for quality bikes with verified sellers and buyers. Enjoy hassle-free browsing with powerful filters, real-time updates, and a seamless experience across all devices.
           </p>
+        </section>
 
-          {/* Tags */}
-          <div className="flex gap-2 text-md font-serif mt-2">
-            <span className="bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full">
-              {bike.brand}
-            </span>
-            <span className="bg-purple-50 text-indigo-600 px-2 py-0.5 rounded-full">
-              {bike.category}
-            </span>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="px-3 py-2 text-gray-600 flex justify-between">
-          <span className="truncate max-w-[90px]">{bike.location}</span>
-        </div>
-      </a>
-    ))
-  ) : (
-    <p className="text-center col-span-full text-gray-500 text-lg">
-      No bikes found.
-    </p>
-  )}
-</section>
-
-
-
-
-      {/* Extra Content Section */}
-      <section className="mt-16 bg-gradient-to-r from-indigo-50 to-white rounded-3xl   font-serif p-10 text-center shadow-lg max-w-4xl mx-auto">
-        <h3 className="text-3xl text-indigo-600 mb-6">
-          Why Choose Nexsell for Bikes?
-        </h3>
-        <p className="text-gray-700 max-w-3xl mx-auto leading-relaxed text-lg">
-          Nexsell provides a trusted marketplace for quality bikes with verified sellers and buyers. Enjoy hassle-free browsing with powerful filters,
-          real-time updates, and a seamless experience across all devices.
-        </p>
-      </section>
-
-      {/* Tailwind animated gradient */}
-      <style>{`
-        @keyframes gradient-x {
-          0%, 100% {
-            background-position: 0% center;
+        {/* Gradient animation */}
+        <style>{`
+          @keyframes gradient-x {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
           }
-          50% {
-            background-position: 100% center;
+          .animate-gradient-x {
+            background-size: 200% auto;
+            animation: gradient-x 3s ease infinite;
           }
-        }
-        .animate-gradient-x {
-          background-size: 200% auto;
-          animation: gradient-x 3s ease infinite;
-        }
-      `}</style>
-    </main>
+        `}</style>
+      </main>
     </>
   );
 }

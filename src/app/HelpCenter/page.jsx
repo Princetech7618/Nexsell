@@ -61,7 +61,7 @@ export default function HelpCenter() {
         transition={{ duration: 0.8 }}
         className="text-center mb-12"
       >
-        <h1 className="text-5xl font-serif-bold text-indigo-700 mb-4">
+        <h1 className="text-5xl font-serif-bold text-gray-800 mb-4">
           NexSell Help Center
         </h1>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -100,7 +100,7 @@ export default function HelpCenter() {
           placeholder="Search FAQs..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-800 shadow-sm"
+          className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-800 shadow-sm"
         />
       </div>
 

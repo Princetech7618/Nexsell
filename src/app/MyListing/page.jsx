@@ -796,7 +796,7 @@ export default function MyListings() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-4xl font-bold text-indigo-700 mb-6 text-center">
+      <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">
         My Listings
       </h1>
 
@@ -924,24 +924,26 @@ export default function MyListings() {
     animate={{ opacity: 1, y: 0 }}
     whileHover={{ scale: 1.03 }}
     transition={{ duration: 0.3 }}
-    className="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col cursor-pointer"
+    className="bg-white rounded border border-gray-400 shadow-lg overflow-hidden flex flex-col cursor-pointer"
   >
     {item.images?.length ? (
       <img
         src={item.images[0]}
         alt={item.title}
-        className="h-52 w-full object-cover rounded-t-3xl"
+        className="h-52 w-full p-2 object-cover rounded"
       />
     ) : (
-      <div className="h-52 w-full bg-indigo-50 flex items-center justify-center text-indigo-300 rounded-t-3xl">
+      <div className="h-52 w-full  bg-indigo-50 flex items-center justify-center text-indigo-300 rounded-t-3xl">
         No Image
       </div>
     )}
 
     <div className="p-5 flex flex-col flex-grow">
-      <h2 className="text-lg font-bold text-black">{item.title}</h2>
-      <p className="text-indigo-600 font-semibold mt-2">₹{item.price}</p>
-      <p className="text-gray-700 text-sm mt-1">{item.location}</p>
+      <h2 className="text-2xl font-bold text-gray-500">{item.title}</h2>
+     <div className="flex justify-between"> 
+       <p className="text-gray-800 font-bold mt-2">₹{item.price}</p>
+      <p className="text-gray-400 text-sm mt-1">{item.location}</p>
+     </div>
 
       <div className="mt-4 flex gap-3">
         <Link

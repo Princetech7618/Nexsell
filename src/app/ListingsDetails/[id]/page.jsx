@@ -58,26 +58,30 @@ export default function Page() {
       </div>
 
       <div className="mt-8 px-2 sm:px-0">
-        <h1 className="text-4xl font-extrabold text-black mb-2">{item.title}</h1>
-        <p className="text-3xl font-bold text-indigo-600 mb-4">₹{item.price}</p>
+        <h1 className="text-4xl font-bold text-gray-500 mb-2">{item.title}</h1>
+      <div className="flex justify-between">
+          <p className="text-3xl font-bold text-gray-800 mb-4">₹{item.price}</p>
+                <p className="text-3xl font-bold text-gray-500 mb-4">{item.location}</p>
+      </div>
+
         <p className="text-gray-700 text-xl mb-6 whitespace-pre-line">
           {item.description || "No description available."}
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-gray-600">
-          <div className="bg-indigo-50 rounded-lg p-4 shadow hover:shadow-lg transition">
+          <div className="bg-indigo-200/50 rounded p-4 shadow hover:shadow-lg transition">
             <h3 className="font-semibold text-indigo-600">Category</h3>
             <p>{item.category || "-"}</p>
           </div>
-          <div className="bg-indigo-50 rounded-lg p-4 shadow hover:shadow-lg transition">
+          <div className="bg-indigo-200/50 rounded p-4 shadow hover:shadow-lg transition">
             <h3 className="font-semibold text-indigo-600">Brand</h3>
             <p>{item.brand || "-"}</p>
           </div>
-          <div className="bg-indigo-50 rounded-lg p-4 shadow hover:shadow-lg transition">
+          <div className="bg-indigo-200/50 rounded p-4 shadow hover:shadow-lg transition">
             <h3 className="font-semibold text-indigo-600">Location</h3>
             <p>{item.location || "-"}</p>
           </div>
-          <div className="bg-indigo-50 rounded-lg p-4 shadow hover:shadow-lg transition">
+          <div className="bg-indigo-200/50 rounded p-4 shadow hover:shadow-lg transition">
             <h3 className="font-semibold text-indigo-600">Contact</h3>
             <p>{item.contact || "-"}</p>
           </div>

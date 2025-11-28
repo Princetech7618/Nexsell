@@ -181,7 +181,7 @@ export default function SellForm() {
     >
       ← Back
     </button>
-      <h2 className="text-3xl font-extrabold text-indigo-700 mb-8 text-center">
+      <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
         Sell Your Item
       </h2>
 

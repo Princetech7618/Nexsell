@@ -62,13 +62,13 @@ export default function ContactSeller() {
       <div className="max-w-7xl mx-auto">
         <Link
           href="/"
-          className="text-indigo-500 underline hover:text-indigo-600 font-semibold"
+          className="text-white underline  p-2 rounded shadow bg-indigo-600 font-semibold"
         >
           ← Back
         </Link>
 
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mt-4 text-indigo-600">Contact Seller</h1>
+          <h1 className="text-4xl font-bold mt-4 text-gray-900">Contact Seller</h1>
           <p className="text-gray-700 mt-2 max-w-xl mx-auto">
             Send a message or chat instantly with the seller.
           </p>
@@ -95,8 +95,8 @@ export default function ContactSeller() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-indigo-900 font-semibold mb-1">
-                    Your Name <span className="text-indigo-600">*</span>
+                  <label className="block text-black font-semibold mb-1">
+                    Your Name <span className="text-black">*</span>
                   </label>
                   <input
                     type="text"
@@ -105,13 +105,13 @@ export default function ContactSeller() {
                     value={form.name}
                     onChange={handleChange}
                     placeholder="John Doe"
-                    className="w-full border border-indigo-300 rounded-md px-4 py-3 text-indigo-900 placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600"
+                    className="w-full border border-black rounded-md px-4 py-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-indigo-900 font-semibold mb-1">
-                    Email <span className="text-indigo-600">*</span>
+                  <label className="block text-black font-semibold mb-1">
+                    Email <span className="text-black">*</span>
                   </label>
                   <input
                     type="email"
@@ -120,12 +120,12 @@ export default function ContactSeller() {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="john@example.com"
-                    className="w-full border border-indigo-300 rounded-md px-4 py-3 text-indigo-900 placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600"
+                    className="w-full border border-black rounded-md px-4 py-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-indigo-900 font-semibold mb-1">
+                  <label className="block text-black font-semibold mb-1">
                     Phone
                   </label>
                   <input
@@ -134,13 +134,13 @@ export default function ContactSeller() {
                     value={form.phone}
                     onChange={handleChange}
                     placeholder="+91 98765 43210"
-                    className="w-full border border-indigo-300 rounded-md px-4 py-3 text-indigo-900 placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600"
+                    className="w-full border border-black rounded-md px-4 py-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-indigo-900 font-semibold mb-1">
-                    Message <span className="text-indigo-600">*</span>
+                  <label className="block text-black font-semibold mb-1">
+                    Message <span className="text-black">*</span>
                   </label>
                   <textarea
                     name="message"
@@ -149,7 +149,7 @@ export default function ContactSeller() {
                     value={form.message}
                     onChange={handleChange}
                     placeholder="Hello, I'm interested in your listing..."
-                    className="w-full border border-indigo-300 rounded-md px-4 py-3 text-indigo-900 placeholder-indigo-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600"
+                    className="w-full border border-black rounded-md px-4 py-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
                   />
                 </div>
 
